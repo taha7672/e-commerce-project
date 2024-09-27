@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'shortcodes' => [
+        'USER_NAME' => 'The name of the user.',
+        'ORDER_ID' => 'The ID of the order.',
+        'ORDER_NUMBER' => 'The Number of the order.',
+        'ORDER_AMOUNT' => 'The Amount of the order.',
+		'ORDER_STATUS' => 'Current Status of Order.',
+        'VAT_AMOUNT' => 'The VAT Amount of the order.',
+        'DISCOUNT_AMOUNT' => 'The VAT Amount of the order.',
+        'SHIPPING_AMOUNT' => 'The Shipping Amount of the order.',
+        'ORDER_DATE' => 'The Date of the order.',
+        'SHIPPING_ADDRESS' => 'The Shipping Address of the order.',
+        'BILLING_ADDRESS' => 'The Billing Address of the order.',
+        'ORDER_ITEMS' => 'The Products of the order.',
+        'PAYMENT_METHOD' => 'The Payment Method of the order.',
+        'DATE' => 'The current date.',
+		// 'ORDER_TOTALS' => 'Detailed Order Totals Values.',
+		'COMPANY_LOGO' => 'Logo of Website.',
+		'COMPANY_ADDRESS' => 'Address of Company.',
+		'COMPANY_EMAIL' => 'Email of Company.',
+		'COMPANY_PHONE' => 'Phone of Company.',
+		'COMPANY_CITY' => 'City of Company.',
+		'COMPANY_STATE' => 'State of Company.',
+		'COMPANY_NAME' => 'Name of Company.',
+		'COMPANY_POSTCODE' => 'Postcode of Company.',
+		'COMPANY_COUNTRY' => 'Country of Company.',
+    ],
+];

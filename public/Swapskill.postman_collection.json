@@ -1,0 +1,3185 @@
+{
+	"info": {
+		"_postman_id": "1c6c65e1-5321-4bdd-a7dd-0ff1abb410ac",
+		"name": "Swapskill",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10196891"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"var token = jsonData.data.token;\r",
+									"pm.environment.set(\"auth_token\", token);\r",
+									"\r",
+									"pm.test('Login Successfully', function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "ahmad@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123123123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "Surya",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Vanshi",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "surya@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "3248651909",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "sky001",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "skills[]",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "profession_id",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "bio",
+									"value": "Hi, I am a database administrator with 7 years of experience.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send forget password link",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Bilal",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ahmad@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/forget-password/link",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forget-password",
+								"link"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}",
+							"host": [
+								"{{base_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resend email verification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "robert@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/email-verification/resend",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"email-verification",
+								"resend"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "quiz",
+			"item": [
+				{
+					"name": "get skill quiz",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/skills/1/quiz",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"skills",
+								"1",
+								"quiz"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "answers[]",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "answers[]",
+									"value": "34",
+									"type": "text"
+								},
+								{
+									"key": "answers[]",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "answers[]",
+									"value": "9",
+									"type": "text"
+								},
+								{
+									"key": "answers[]",
+									"value": "23",
+									"type": "text"
+								},
+								{
+									"key": "answers[]",
+									"value": "7",
+									"type": "text"
+								},
+								{
+									"key": "answers[]",
+									"value": "9",
+									"type": "text"
+								},
+								{
+									"key": "answers[]",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "answers[]",
+									"value": "26",
+									"type": "text"
+								},
+								{
+									"key": "answers[]",
+									"value": "18",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/skills/1/quiz",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"skills",
+								"1",
+								"quiz"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "swap",
+			"item": [
+				{
+					"name": "skill swap request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "skill_id",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "proposal",
+									"value": "I want to learn photography from you. I have amazing coding skills which I can swap with you. Let's connect to learn skills from each other. thanks.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/skill/swap-request",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"skill",
+								"swap-request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "accept request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "swap_id",
+									"value": "8",
+									"type": "text"
+								},
+								{
+									"key": "skill_id",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "I am ready to teach you some photography skills. I am interested in your virtual assistant skills",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/skill/swap-request/accept",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"skill",
+								"swap-request",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reject request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "reject_reason",
+									"value": "not interested",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "I am not interested in learning any of your skills. thanks for reaching out to me.",
+									"type": "text"
+								},
+								{
+									"key": "swap_id",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/skill/swap-request/reject",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"skill",
+								"swap-request",
+								"reject"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "received requests",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "reject_reason",
+									"value": "not available",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "testing",
+									"type": "text"
+								},
+								{
+									"key": "swap_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/skill/recieved-swap-requests",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"skill",
+								"recieved-swap-requests"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sent requests",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "reject_reason",
+									"value": "not available",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "testing",
+									"type": "text"
+								},
+								{
+									"key": "swap_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/skill/sent-swap-requests",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"skill",
+								"sent-swap-requests"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "reject_reason",
+									"value": "not available",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "testing",
+									"type": "text"
+								},
+								{
+									"key": "swap_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/skill/swaps",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"skill",
+								"swaps"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "chat",
+			"item": [
+				{
+					"name": "room list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/chat/rooms?search=",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat",
+								"rooms"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "room messages",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/chat/rooms/85a56449-7e13-403d-822c-e857809300b5/messages",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat",
+								"rooms",
+								"85a56449-7e13-403d-822c-e857809300b5",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send message",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "attachment",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "attachment_type",
+									"value": "video",
+									"description": "video, image, document",
+									"type": "text"
+								},
+								{
+									"key": "message",
+									"value": "Hi",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/chat/rooms/85a56449-7e13-403d-822c-e857809300b5/message",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat",
+								"rooms",
+								"85a56449-7e13-403d-822c-e857809300b5",
+								"message"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "subscription",
+			"item": [
+				{
+					"name": "transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/subscription/transactions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"subscription",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancel",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/subscription/cancel",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"subscription",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pause",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/subscription/pause",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"subscription",
+								"pause"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resume",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/subscription/resume",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"subscription",
+								"resume"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "notifications",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/notifications",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/notifications/cd604424-0a95-418e-9cac-5828ac83b592",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notifications",
+								"cd604424-0a95-418e-9cac-5828ac83b592"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "advertisements",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/ads",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ads"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Forum",
+			"item": [
+				{
+					"name": "questions list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/forum/questions?search=ph&tags[]=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forum",
+								"questions"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "ph"
+								},
+								{
+									"key": "tags[]",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post question",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "how to use variables in php?",
+									"type": "text"
+								},
+								{
+									"key": "detail",
+									"value": "Hi I am using PHP first time. how can I declare variales in php and what is the keyword for constant.",
+									"type": "text"
+								},
+								{
+									"key": "privacy",
+									"value": "public",
+									"description": "public, members-only",
+									"type": "text"
+								},
+								{
+									"key": "tags[]",
+									"value": "PHP",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/forum/question",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forum",
+								"question"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update question",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "how to use variables in php?",
+									"type": "text"
+								},
+								{
+									"key": "detail",
+									"value": "Hi I am using PHP first time. how can I declare variales in php and what is the keyword for constant.",
+									"type": "text"
+								},
+								{
+									"key": "privacy",
+									"value": "public",
+									"description": "public, members-only",
+									"type": "text"
+								},
+								{
+									"key": "tags[]",
+									"value": "PHP",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/forum/questions/d4e52a49-9714-4f52-9f95-938f7d89d0bb",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forum",
+								"questions",
+								"d4e52a49-9714-4f52-9f95-938f7d89d0bb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my questions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/forum/my-questions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forum",
+								"my-questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single question",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/forum/questions/d4e52a49-9714-4f52-9f95-938f7d89d0bb",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forum",
+								"questions",
+								"d4e52a49-9714-4f52-9f95-938f7d89d0bb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "answers list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/forum/questions/d4e52a49-9714-4f52-9f95-938f7d89d0bb/answers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forum",
+								"questions",
+								"d4e52a49-9714-4f52-9f95-938f7d89d0bb",
+								"answers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "comments list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/forum/answers/1/comments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forum",
+								"answers",
+								"1",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post answer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "detail",
+									"value": "anything else?",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/forum/questions/d4e52a49-9714-4f52-9f95-938f7d89d0bb/answer",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forum",
+								"questions",
+								"d4e52a49-9714-4f52-9f95-938f7d89d0bb",
+								"answer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "like answer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/forum/answers/1/like",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forum",
+								"answers",
+								"1",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "detail",
+									"value": "yes, thanks for your answer",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/forum/answers/2/comment",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forum",
+								"answers",
+								"2",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mark answer as best",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/forum/answers/2/mark-best",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forum",
+								"answers",
+								"2",
+								"mark-best"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete question",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/forum/questions/d4e52a49-9714-4f52-9f95-938f7d89d0bb",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forum",
+								"questions",
+								"d4e52a49-9714-4f52-9f95-938f7d89d0bb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete answer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/forum/answers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forum",
+								"answers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/forum/comments/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forum",
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Support Tickets",
+			"item": [
+				{
+					"name": "Create Ticket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "subject",
+									"value": "account problem",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "I can't able to access my account.",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/support/ticket",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"support",
+								"ticket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mark ticket as solved",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/support/tickets/SS-684260/solved",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"support",
+								"tickets",
+								"SS-684260",
+								"solved"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reply ticket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "okay thanks",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/support/tickets/SS-654330/reply",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"support",
+								"tickets",
+								"SS-654330",
+								"reply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ticket list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "subject",
+									"value": "Duplicate payment",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "I subscribe to premium plan.my card got charged twice. please refund the duplicate payment",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/support/tickets?status=open",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"support",
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "open",
+									"description": "open, solved"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ticket replies",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "subject",
+									"value": "Duplicate payment",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "I subscribe to premium plan.my card got charged twice. please refund the duplicate payment",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/support/tickets/SS-654330/replies",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"support",
+								"tickets",
+								"SS-654330",
+								"replies"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/users?search=&skills[]=2&skills[]=4&rating=3.5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": ""
+								},
+								{
+									"key": "skills[]",
+									"value": "2"
+								},
+								{
+									"key": "skills[]",
+									"value": "4",
+									"description": "skill id's"
+								},
+								{
+									"key": "rating",
+									"value": "3.5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/users/ahmad",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"ahmad"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "setting",
+			"item": [
+				{
+					"name": "update profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "bilal",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "riaz",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "3248651939",
+									"type": "text"
+								},
+								{
+									"key": "bio",
+									"value": "Hi, I am a web developer with 6 years of experience.",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/mb247/Downloads/WhatsApp Image 2024-01-03 at 15.36.37_d45fbfb4.jpg"
+								},
+								{
+									"key": "profession",
+									"value": "software engineer",
+									"type": "text"
+								},
+								{
+									"key": "timezone",
+									"value": "Asia/Karachi",
+									"type": "text"
+								},
+								{
+									"key": "language",
+									"value": "turkish",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update social links",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "instagram_link",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "facebook_link",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "linkedin_link",
+									"value": "https://www.linkedin.com/in/bilal-riaz-2961761a3/",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/social-links",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"social-links"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "current_password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12341234",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "12341234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/update-password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enable 2fa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "status",
+									"value": "0",
+									"description": "0,1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/enable-2fa",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"enable-2fa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subscribe newsletter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/subscribe-newsletter",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"subscribe-newsletter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deactivate account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "password",
+									"value": "123123123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/deactivate-account",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"deactivate-account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get data",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/data?langauge=english",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"data"
+							],
+							"query": [
+								{
+									"key": "langauge",
+									"value": "english"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "followers",
+			"item": [
+				{
+					"name": "follow user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/follow",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"follow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unfollow user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/unfollow",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"unfollow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "following list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/following?search=st",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"following"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "st"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "followers list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/followers?search=st",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"followers"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "st"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "block users",
+			"item": [
+				{
+					"name": "list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/blocked-users?search=steve",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blocked-users"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "steve"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "block user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/block",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"block"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "feed",
+			"item": [
+				{
+					"name": "comment-like",
+					"item": [
+						{
+							"name": "post comment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "detail",
+											"value": "good",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/feeds/10/comment",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"feeds",
+										"10",
+										"comment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "like feed",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "detail",
+											"value": "good",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/feeds/10/like",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"feeds",
+										"10",
+										"like"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list comments",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{base_url}}/feeds/3/comments",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"feeds",
+										"3",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete comment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "description",
+											"value": "hello it's my first post on skillswap",
+											"type": "text"
+										},
+										{
+											"key": "privacy",
+											"value": "public",
+											"description": "public, private, only-me",
+											"type": "text"
+										},
+										{
+											"key": "attachments[]",
+											"type": "file",
+											"src": "/C:/Users/mb247/Downloads/Swapskill.postman_collection.json"
+										},
+										{
+											"key": "attachments[]",
+											"type": "file",
+											"src": "/C:/Users/mb247/Downloads/devstorm.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/feeds/comments/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"feeds",
+										"comments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "create feed",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "notifications testing post",
+									"type": "text"
+								},
+								{
+									"key": "privacy",
+									"value": "public",
+									"description": "public, private, only-me",
+									"type": "text"
+								},
+								{
+									"key": "attachments[]",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/feeds",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"feeds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update feed",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "hello it's my first post on skillswap. let's connect together to build a strong Laravel community",
+									"type": "text"
+								},
+								{
+									"key": "privacy",
+									"value": "public",
+									"description": "public, private, only-me",
+									"type": "text"
+								},
+								{
+									"key": "attachments[]",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "delete_attachments[]",
+									"value": "3",
+									"description": "attachments id",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/feeds/3/update",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"feeds",
+								"3",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete feed",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "hello it's my first post on skillswap",
+									"type": "text"
+								},
+								{
+									"key": "privacy",
+									"value": "public",
+									"description": "public, private, only-me",
+									"type": "text"
+								},
+								{
+									"key": "attachments[]",
+									"type": "file",
+									"src": "/C:/Users/mb247/Downloads/Swapskill.postman_collection.json"
+								},
+								{
+									"key": "attachments[]",
+									"type": "file",
+									"src": "/C:/Users/mb247/Downloads/devstorm.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/feeds/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"feeds",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list feeds",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/feeds",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"feeds"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
